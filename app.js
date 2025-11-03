@@ -3,6 +3,7 @@ import { PORT } from "./config/env.js";
 import userRoute from "./routes/user.routes.js";
 import subscription from "./routes/subscription.route.js";
 import authRouter from "./routes/auth.routes.js";
+import connectToDatabase from "./database/mongoose.js";
 
 const port = PORT || 3000;
 const app = express();
@@ -15,8 +16,9 @@ app.get("/", (req, res) => {
   res.send("Welcombe to subscription api.");
 });
 
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log(`server is running at : http://localhost:${port}`);
+  await connectToDatabase();
 });
 
 export default app;
