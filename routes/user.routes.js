@@ -1,11 +1,13 @@
 import { Router } from "express";
 import { getUser, getUsers } from "../controllers/user.controller.js";
+import { authorize } from "../middleware/auth.middleware.js";
+import errorMiddleware from "../middleware/error.middle.js";
 
 const userRoute = Router();
 
 userRoute.get("/", getUsers);
 
-userRoute.get("/:id", getUser);
+userRoute.get("/:id", authorize, errorMiddleware, getUser); // using authorize middleware here.
 
 userRoute.post("/", (req, res) => {
   res.send({ title: "create user" });

@@ -87,16 +87,9 @@ export const signIn = async (req, res, next) => {
       },
     });
   } catch (err) {
-    console.log(err);
-    res.status(404).json({
-      success: true,
-      message: "inavalid user",
-    });
+    next(err);
   }
 };
 export const signOut = async (req, res, next) => {
   // implement sign up logic
-
-  
-
 };
