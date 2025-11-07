@@ -22,7 +22,7 @@ export const authorize = async (req, res, next) => {
 
     req.user = user;
     next();
-  } catch (err) {
+  } catch (err) {  
     res.status(401).json({ message: "Unauthorised", error: err.message });
   }
 };
