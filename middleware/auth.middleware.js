@@ -4,16 +4,19 @@ import User from "../model/user.model.js";
 
 // someone making a req get userDetails --> authorize middleware -> verify --> if valid --> next --> get user details
 
-export const authorize = async (req, res, next) => {
+const authorize = async (req, res, next) => {
   try {
     let token;
+
     if (
       req.headers.authorization &&
       req.headers.authorization.startsWith("Bearer")
     ) {
       token = req.headers.authorization.split(" ")[1];
     }
+
     if (!token) return res.status(401).json({ message: "Unauthorized" });
+
     const decoded = jwt.verify(token, JWT_SECRET);
 
     const user = await User.findById(decoded.userId);
@@ -21,8 +24,11 @@ export const authorize = async (req, res, next) => {
     if (!user) return res.status(401).json({ message: "Unauthorized" });
 
     req.user = user;
+
     next();
-  } catch (err) {  
-    res.status(401).json({ message: "Unauthorised", error: err.message });
+  } catch (error) {
+    res.status(401).json({ message: "Unauthorized", error: error.message });
   }
 };
+
+export default authorize;

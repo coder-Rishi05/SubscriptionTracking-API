@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../model/user.model.js";
+
 import { JWT_SECRET, JWT_EXPIRES_IN } from "../config/env.js";
 
 // what is req body ? --> req.body is an object containing data from the client (POST reqiest)
