@@ -17,6 +17,6 @@ const arcMiddleware = async (req, res, next) => {
   } catch (error) {
     console.log(`Arcjet Middleware Error: ${error}`);
     next(error);
-  }
+  } 
 };
 export default arcMiddleware;
