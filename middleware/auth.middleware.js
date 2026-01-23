@@ -7,7 +7,6 @@ import User from "../model/user.model.js";
 const authorize = async (req, res, next) => {
   try {
     let token;
-
     if (
       req.headers.authorization &&
       req.headers.authorization.startsWith("Bearer")

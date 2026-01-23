@@ -9,8 +9,9 @@ import { JWT_SECRET, JWT_EXPIRES_IN } from "../config/env.js";
 
 export const signUp = async (req, res, next) => {
   // implement sign up logic
-  const session = await mongoose.startSession();
+  const session = await mongoose.startSession(); // creating a session
   session.startTransaction();
+  // atomic operations
 
   try {
     const { name, email, password } = req.body;
@@ -31,8 +32,9 @@ export const signUp = async (req, res, next) => {
 
     const newUser = await User.create(
       [{ name, email, password: hashPassword }],
-      { session }
+      { session },
     );
+
     const token = jwt.sign({ userId: newUser[0]._id }, JWT_SECRET, {
       expiresIn: JWT_EXPIRES_IN,
     });
@@ -54,6 +56,7 @@ export const signUp = async (req, res, next) => {
     next(err);
   }
 };
+
 
 export const signIn = async (req, res, next) => {
   // implement sign up logic

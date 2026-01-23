@@ -7,7 +7,7 @@ const userRoute = Router();
 
 userRoute.get("/", getUsers);
 
-userRoute.get("/:id", authorize, errorMiddleware, getUser); // using authorize middleware here.
+userRoute.get("/:id", authorize, getUser); // using authorize middleware here so that only login user can make this request
 
 userRoute.post("/", (req, res) => {
   res.send({ title: "create user" });
