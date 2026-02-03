@@ -26,9 +26,7 @@ export const signUp = async (req, res, next) => {
     }
 
     // hash password
-
-    const salt = await bcrypt.genSalt(10);
-    const hashPassword = await bcrypt.hash(password, salt);
+    const hashPassword = await bcrypt.hash(password, 10);
 
     const newUser = await User.create(
       [{ name, email, password: hashPassword }],
@@ -56,7 +54,6 @@ export const signUp = async (req, res, next) => {
     next(err);
   }
 };
-
 
 export const signIn = async (req, res, next) => {
   // implement sign up logic
